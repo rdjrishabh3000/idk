@@ -133,3 +133,64 @@ footer {
     margin-top: 4rem;
     font-size: 0.9rem;
 }
+
+
+/* --- DARK THEME STYLES --- */
+
+/* Style for the toggle button itself */
+.theme-btn {
+    background: none;
+    border: 1px solid #3498db;
+    color: #3498db;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+.theme-btn:hover {
+    background: #3498db;
+    color: #ffffff;
+}
+
+/* Base changes for dark mode */
+body.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Adjust section backgrounds */
+body.dark-theme .about-section {
+    background-color: #1a1a1a !important;
+}
+body.dark-theme .about-card {
+    border-left-color: #e74c3c !important; /* changes accent line color */
+    color: #cccccc;
+}
+body.dark-theme .skills-section {
+    background-color: #181818 !important;
+    border-color: #2c2c2c !important;
+}
+body.dark-theme .section-title {
+    color: #ffffff !important;
+}
+
+/* Adjust project cards in dark mode */
+body.dark-theme .project-card {
+    background-color: #1e1e1e !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    color: #e0e0e0;
+}
+body.dark-theme .project-card h3 {
+    color: #ffffff !important;
+}
+body.dark-theme .project-card p {
+    color: #aaaaaa !important;
+}
+
+/* Adjust contact section */
+body.dark-theme .contact-section {
+    background-color: #111b24 !important;
+}
+
+
