@@ -23,6 +23,7 @@ def play_game():
                 print("📈 Too high! Try a lower number.")
             else:
                 print(f"\n🎉 CONGRATULATIONS! You guessed it in {attempts} attempts!")
+                input("\nPress Enter to exit...")   
                 break
         except ValueError:
             print("❌ Invalid input. Please enter a valid whole number.")
