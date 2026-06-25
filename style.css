@@ -19,7 +19,7 @@ html {
     --accent-color: #000000;
     --border-color: #eaeaea;
     --card-bg: #fafafa;
-    --header-bg: rgba(255, 255, 255, 0.8);
+    --header-bg: rgba(255, 255, 255, 0.9);
 }
 
 body.dark-theme {
@@ -29,7 +29,7 @@ body.dark-theme {
     --accent-color: #ffffff;
     --border-color: #222222;
     --card-bg: #141414;
-    --header-bg: rgba(10, 10, 10, 0.8);
+    --header-bg: rgba(10, 10, 10, 0.9);
 }
 
 body {
@@ -39,10 +39,15 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+/* Center-aligned structural container */
 .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    text-align: center;  /* Centers text strings */
 }
 
 /* ==========================================
@@ -52,7 +57,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1.2rem 2rem;
     position: sticky;
     top: 0;
     background-color: var(--header-bg);
@@ -72,7 +77,7 @@ header {
 nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 nav a {
@@ -87,7 +92,6 @@ nav a:hover {
     color: var(--text-color);
 }
 
-/* Theme Button */
 .theme-btn {
     background: none;
     border: 1px solid var(--border-color);
@@ -109,23 +113,23 @@ nav a:hover {
    3. HERO SECTION
    ========================================== */
 .hero {
-    padding: 10rem 2rem;
+    padding: 8rem 2rem;
     display: flex;
     align-items: center;
-    min-height: 70vh;
+    justify-content: center;
+    min-height: 60vh;
 }
 
 .hero-content {
-    max-width: 750px;
-    margin: 0 auto;
-    width: 100%;
+    max-width: 700px;
+    text-align: center;
 }
 
 .hero h1 {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     font-weight: 700;
     letter-spacing: -1px;
-    line-height: 1.25;
+    line-height: 1.3;
     margin-bottom: 1.5rem;
 }
 
@@ -144,15 +148,16 @@ nav a:hover {
 }
 
 .minimal-link:hover {
-    transform: translateX(4px);
+    transform: translateY(2px);
 }
 
 /* ==========================================
-   4. LAYOUT SECTIONS
+   4. LAYOUT SECTIONS (SEPARATED & CENTERED)
    ========================================== */
 .about-section, .skills-section, .projects-container, .contact-section {
-    padding: 6rem 0;
-    border-top: 1px solid var(--border-color);
+    padding: 7rem 0;
+    border-top: 1px solid var(--border-color); /* Visible structural dividers */
+    width: 100%;
 }
 
 .section-title {
@@ -160,22 +165,25 @@ nav a:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--text-muted);
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
-/* About Layout */
+/* About Section Text Restrictions */
 .about-content p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
     color: var(--text-color);
-    max-width: 750px;
+    max-width: 650px; /* Keeps text columns narrow and centered */
 }
 
-/* Skills Layout */
+/* Skills Flexbox Centering */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
+    justify-content: center; /* Centers tags inside container */
+    max-width: 650px;
 }
 
 .tech-tag {
@@ -189,27 +197,31 @@ nav a:hover {
 }
 
 /* ==========================================
-   5. MINIMAL PROJECTS GRID
+   5. PROJECTS CARDS LAYOUT
    ========================================== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
 }
 
 .project-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: border-color 0.2s ease;
+    align-items: center; /* Center aligning contents inside cards */
+    text-align: center;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .project-card:hover {
     border-color: var(--text-color);
+    transform: translateY(-2px);
 }
 
 .project-card h3 {
@@ -222,18 +234,23 @@ nav a:hover {
     color: var(--text-muted);
     font-size: 0.95rem;
     margin-bottom: 2rem;
+    max-width: 400px;
 }
 
 .card-footer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Stack tag and action items cleanly */
+    gap: 0.8rem;
     align-items: center;
+    width: 100%;
 }
 
 .tech-tag-sm {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .view-code-link {
@@ -241,6 +258,12 @@ nav a:hover {
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.view-code-link:hover {
+    border-color: var(--text-color);
 }
 
 .current-marker {
@@ -252,22 +275,18 @@ nav a:hover {
 /* ==========================================
    6. CONTACT & FOOTER
    ========================================== */
-.contact-section {
-    text-align: center;
-}
-
 .contact-desc {
-    font-size: 1.15rem;
-    max-width: 550px;
+    font-size: 1.1rem;
+    max-width: 500px;
     margin: 0 auto 1.5rem auto;
     color: var(--text-muted);
 }
 
 .email-display {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.5px;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .btn-minimal {
@@ -275,7 +294,7 @@ nav a:hover {
     text-decoration: none;
     background-color: var(--accent-color);
     color: var(--bg-color);
-    padding: 0.75rem 2rem;
+    padding: 0.8rem 2.5rem;
     border-radius: 6px;
     font-weight: 600;
     font-size: 0.95rem;
@@ -287,14 +306,13 @@ nav a:hover {
 }
 
 footer {
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     border-top: 1px solid var(--border-color);
     text-align: center;
     color: var(--text-muted);
     font-size: 0.85rem;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
     .hero h1 { font-size: 2rem; }
     header { padding: 1rem; }
