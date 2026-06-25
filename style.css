@@ -1,5 +1,5 @@
 /* ==========================================
-   1. MINIMALIST RESET & BASE STYLES
+   1. COLOR PALETTE CONFIGURATION & RESET
    ========================================== */
 * {
     margin: 0;
@@ -12,24 +12,32 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Light Mode: Clean White with Sophisticated Blue Accents */
 :root {
     --bg-color: #ffffff;
     --text-color: #111111;
-    --text-muted: #666666;
-    --accent-color: #000000;
-    --border-color: #eaeaea;
-    --card-bg: #fafafa;
+    --text-muted: #556677;
+    --accent-color: #2b6cb0;       /* Muted Steel Blue */
+    --accent-hover: #1a4971;
+    --border-color: #e2e8f0;
+    --card-bg: #f7fafc;
     --header-bg: rgba(255, 255, 255, 0.9);
+    --tag-bg: #ebf8ff;
+    --tag-text: #2b6cb0;
 }
 
+/* Dark Mode: Deep Slate with Vibrant Electric Cyan Accents */
 body.dark-theme {
-    --bg-color: #0a0a0a;
-    --text-color: #f5f5f5;
-    --text-muted: #888888;
-    --accent-color: #ffffff;
-    --border-color: #222222;
-    --card-bg: #141414;
-    --header-bg: rgba(10, 10, 10, 0.9);
+    --bg-color: #0b0f19;           /* Deep Midnight Blue/Slate */
+    --text-color: #f7fafc;
+    --text-muted: #94a3b8;
+    --accent-color: #00e5ff;       /* Vibrant Electric Cyan */
+    --accent-hover: #00b3cc;
+    --border-color: #1e293b;
+    --card-bg: #131c2e;            /* Slightly lighter slate for contrast */
+    --header-bg: rgba(11, 15, 25, 0.9);
+    --tag-bg: rgba(0, 229, 255, 0.1);
+    --tag-text: #00e5ff;
 }
 
 body {
@@ -39,19 +47,18 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Center-aligned structural container */
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers items horizontally */
-    text-align: center;  /* Centers text strings */
+    align-items: center;
+    text-align: center;
 }
 
 /* ==========================================
-   2. STICKY HEADER & NAV
+   2. STICKY HEADER & NAV (Colored Logo/Links)
    ========================================== */
 header {
     display: flex;
@@ -72,6 +79,8 @@ header {
     font-weight: 700;
     font-size: 1.1rem;
     letter-spacing: -0.5px;
+    color: var(--accent-color); /* Logo utilizes accent color */
+    transition: color 0.3s ease;
 }
 
 nav {
@@ -89,24 +98,24 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--text-color);
+    color: var(--accent-color); /* Highlight color on hover */
 }
 
 .theme-btn {
     background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 500;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .theme-btn:hover {
-    background-color: var(--card-bg);
-    border-color: var(--text-color);
+    background-color: var(--tag-bg);
+    border-color: var(--accent-hover);
 }
 
 /* ==========================================
@@ -133,6 +142,12 @@ nav a:hover {
     margin-bottom: 1.5rem;
 }
 
+/* Colorful gradient accent string */
+.hero h1 span {
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
 .hero p {
     font-size: 1.2rem;
     color: var(--text-muted);
@@ -140,23 +155,24 @@ nav a:hover {
 }
 
 .minimal-link {
-    color: var(--text-color);
+    color: var(--accent-color);
     text-decoration: none;
     font-weight: 600;
     display: inline-block;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .minimal-link:hover {
     transform: translateY(2px);
+    color: var(--accent-hover);
 }
 
 /* ==========================================
-   4. LAYOUT SECTIONS (SEPARATED & CENTERED)
+   4. LAYOUT SECTIONS
    ========================================== */
 .about-section, .skills-section, .projects-container, .contact-section {
     padding: 7rem 0;
-    border-top: 1px solid var(--border-color); /* Visible structural dividers */
+    border-top: 1px solid var(--border-color);
     width: 100%;
 }
 
@@ -164,36 +180,38 @@ nav a:hover {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--text-muted);
+    color: var(--accent-color); /* Headers match the branding accent color */
     margin-bottom: 3rem;
     text-align: center;
+    font-weight: 700;
+    transition: color 0.3s ease;
 }
 
-/* About Section Text Restrictions */
 .about-content p {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     color: var(--text-color);
-    max-width: 650px; /* Keeps text columns narrow and centered */
+    max-width: 650px;
 }
 
-/* Skills Flexbox Centering */
+/* Colored Technical Tags */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    justify-content: center; /* Centers tags inside container */
+    justify-content: center;
     max-width: 650px;
 }
 
 .tech-tag {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
+    background-color: var(--tag-bg);
+    border: 1px solid rgba(0,0,0,0.02);
+    color: var(--tag-text);
     padding: 0.5rem 1.2rem;
     border-radius: 6px;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* ==========================================
@@ -214,13 +232,13 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center; /* Center aligning contents inside cards */
+    align-items: center;
     text-align: center;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
 
 .project-card:hover {
-    border-color: var(--text-color);
+    border-color: var(--accent-color); /* Glowing accent border on hover */
     transform: translateY(-2px);
 }
 
@@ -239,7 +257,7 @@ nav a:hover {
 
 .card-footer {
     display: flex;
-    flex-direction: column; /* Stack tag and action items cleanly */
+    flex-direction: column;
     gap: 0.8rem;
     align-items: center;
     width: 100%;
@@ -247,8 +265,8 @@ nav a:hover {
 
 .tech-tag-sm {
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
+    font-weight: 700;
+    color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -259,17 +277,21 @@ nav a:hover {
     font-weight: 600;
     font-size: 0.9rem;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, color 0.2s;
 }
 
 .view-code-link:hover {
-    border-color: var(--text-color);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .current-marker {
     font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: italic;
+    color: var(--tag-text);
+    background-color: var(--tag-bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
 /* ==========================================
@@ -287,6 +309,8 @@ nav a:hover {
     font-weight: 700;
     letter-spacing: -0.5px;
     margin-bottom: 2.5rem;
+    color: var(--accent-color); /* Highlights email address visually */
+    transition: color 0.3s ease;
 }
 
 .btn-minimal {
@@ -298,11 +322,12 @@ nav a:hover {
     border-radius: 6px;
     font-weight: 600;
     font-size: 0.95rem;
-    transition: opacity 0.2s ease;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .btn-minimal:hover {
-    opacity: 0.85;
+    opacity: 0.9;
+    background-color: var(--accent-hover);
 }
 
 footer {
