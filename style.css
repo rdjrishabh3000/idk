@@ -177,16 +177,22 @@ nav a:hover {
 }
 
 .section-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--accent-color); /* Headers match the branding accent color */
+    color: var(--accent-color);
     margin-bottom: 3rem;
     text-align: center;
     font-weight: 700;
-    transition: color 0.3s ease;
-}
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 
+    /* New Block/Badge Styling */
+    display: inline-block;
+    background-color: var(--tag-bg);
+    border: 1px solid rgba(0, 229, 255, 0.05);
+    padding: 0.4rem 1.2rem;
+    border-radius: 4px;
+}
 .about-content p {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
