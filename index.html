@@ -60,13 +60,14 @@
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 
-                <!-- Project 1: Guessing Game -->
+                <!-- Project 1: Guessing Game (With Viewer Trigger) -->
                 <div class="project-card">
                     <h3>🎯 Number Guessing Game</h3>
                     <p>A terminal-based Python script that challenges users to guess a randomly generated number with dynamic hints.</p>
                     <div class="card-footer">
                         <span class="tech-tag-sm">Python</span>
-                        <a href="guessing_game.py" target="_blank" class="view-code-link">View Code →</a>
+                        <!-- Updated to trigger the modal instead of downloading -->
+                        <button id="open-code-btn" class="view-code-link" style="background: none; border: none; cursor: pointer; font-family: inherit;">View Code →</button>
                     </div>
                 </div>
 
@@ -94,30 +95,128 @@
         </div>
     </section>
 
+    <!-- Interactive Code Snippet Modal Overlay -->
+    <div id="code-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>guessing_game.py</h4>
+                <div class="modal-actions">
+                    <button id="copy-btn" class="modal-btn">📋 Copy</button>
+                    <button id="close-code-btn" class="modal-btn close">&times; Close</button>
+                </div>
+            </div>
+            <pre><code id="code-block">import random
+import os
+
+HIGHSCORE_FILE = "highscore.txt"
+
+def load_high_score():
+    if os.path.exists(HIGHSCORE_FILE):
+        try:
+            with open(HIGHSCORE_FILE, "r") as f:
+                return int(f.read().strip())
+        except ValueError:
+            return None
+    return None
+
+def save_high_score(score):
+    with open(HIGHSCORE_FILE, "w") as f:
+        f.write(str(score))
+
+def get_difficulty():
+    print("\nSelect Difficulty Level:")
+    print("1. Easy   (1-50,  10 attempts)")
+    print("2. Medium (1-100, 7 attempts)")
+    print("3. Hard   (1-200, 5 attempts)")
+    
+    while True:
+        choice = input("Enter choice (1, 2, or 3): ").strip()
+        if choice == "1": return 50, 10
+        elif choice == "2": return 100, 7
+        elif choice == "3": return 200, 5
+        print("❌ Invalid choice.")
+
+def play_game():
+    print("=========================================")
+    print("🎯 WELCOME TO THE NUMBER GUESSING GAME! 🎯")
+    print("=========================================")
+    
+    high_score = load_high_score()
+    if high_score is not None:
+        print(f"🏆 Current High Score Record: {high_score} attempts")
+    else:
+        print("🏆 No high score set yet.")
+        
+    max_num, max_attempts = get_difficulty()
+    secret_number = random.randint(1, max_num)
+    attempts = 0
+
+    while attempts < max_attempts:
+        try:
+            guess = int(input(f"\n[Attempt {attempts + 1}/{max_attempts}] Enter guess: "))
+            attempts += 1
+            if guess < secret_number: print("📉 Too low!")
+            elif guess > secret_number: print("📈 Too high!")
+            else:
+                print(f"\n🎉 Correct in {attempts} attempts!")
+                if high_score is None or attempts < high_score:
+                    save_high_score(attempts)
+                break
+        except ValueError:
+            print("❌ Invalid input.")
+    else:
+        print(f"\n💥 Game Over! Number was {secret_number}.")
+
+    input("\nPress Enter to exit...")
+
+if __name__ == '__main__':
+    play_game()</code></pre>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <p>© 2026 Built with precision. Find me on GitHub!</p>
     </footer>
 
-    <!-- Persistent Dark Mode Script -->
-   <!-- Clean Theme Switching Logic -->
+    <!-- Combined JavaScript for Theme and Interactive Viewer -->
     <script>
+        // Theme Switching Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
-        
-        // Apply saved theme preference on page load
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-theme');
         }
-
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
-            
-            // Save the user's preference persistently
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+
+        // Modal Interactive Viewer Logic
+        const modal = document.getElementById('code-modal');
+        const openBtn = document.getElementById('open-code-btn');
+        const closeBtn = document.getElementById('close-code-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const codeBlock = document.getElementById('code-block');
+
+        openBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        });
+
+        const closeModal = () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        // Copy Clipboard Feature
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                copyBtn.innerText = '✅ Copied!';
+                setTimeout(() => { copyBtn.innerText = '📋 Copy'; }, 2000);
+            });
         });
     </script>
 
